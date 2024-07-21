@@ -1,38 +1,81 @@
 .App {
   text-align: center;
+  padding: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+td {
+  border-bottom: 1px solid lightgrey;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+.app-container {
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  margin: 0;
+}
+
+.subscription-head, .projects-box {
+  height: 90%;
+  border: 1px solid #6D8472;
+  border-radius: 15px;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+#premium-subscription {
+  background-color: #876a37;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+#plus-subscription {
+  background-color: #623330;
+}
+
+#base-subscription {
+  background-color: #312f46;
+}
+
+.projects-box:hover, .projects-box:focus {
+  background-color: #6D8472;
+  color: #09110B;
+}
+
+.projects-box:hover {
+  transition: 
+    background-color 0.2s,
+    color 0.2s;
+}
+
+@keyframes animateErrorModal {
+  from {top: -300px}
+  to {top: 10%}
+}
+
+@keyframes animateAddOnModal {
+  from {top: -300px}
+  to {top: 50%}
+}
+
+.add-on-box:hover {
+  background-color: rgba(256, 256, 256, 0.3);
+  color: #09110B;
+}
+
+.projects-container::-webkit-scrollbar {
+  display: none;
+}
+
+.form-input-box {
+  width: 100%;
+  border: 2px solid transparent;
+  background-color: #e8e5df;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen';
+  font-size: .7rem;
+  margin-bottom: 10px;
+  border-radius: 1px;
+}
+
+.send-button:hover {
+  background-color: #6D8472;
+  color: #e8e5df;
+}
+
+.plan-container:hover {
+  border: 3px solid #6D8472;
 }
