@@ -34,7 +34,7 @@ const SendButton = styled('button')({
   borderRadius: '1px'
 })
 
-function Contact({ token, setTokenFunction }) {
+function Contact() {
   const [result, setResult] = React.useState("");
 
   const onSubmit = async (event) => {
@@ -96,7 +96,7 @@ function Contact({ token, setTokenFunction }) {
           <PurchaseItem>
             <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
               <div style={{ width: "100px" }}>
-                insert photo
+                <img src="/images/experiences.png" alt="all experiences and their logos" style={{width: "100%"}}/>
               </div>
               <div className="cart-item-container" style={{ display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
                 <div>
@@ -121,7 +121,7 @@ function Contact({ token, setTokenFunction }) {
           <PurchaseItem>
             <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
               <div style={{ width: "100px" }}>
-                insert photo
+                <img src="/images/projects.png" alt="all projects and their logos" style={{width: "100%"}}/>
               </div>
               <div className="cart-item-container" style={{ display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
                 <div>
@@ -146,7 +146,7 @@ function Contact({ token, setTokenFunction }) {
           <PurchaseItem>
             <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
               <div style={{ width: "100px" }}>
-                insert photo
+                <img src="/images/add-ons.png" alt="add on logo" style={{width: "100%"}}/>
               </div>
               <div className="cart-item-container" style={{ display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
                 <div>
@@ -217,7 +217,7 @@ function Contact({ token, setTokenFunction }) {
               <input className="form-input-box" type="text" name="name" placeholder="Name" required/>
               <input className="form-input-box" type="email" name="email" placeholder="Email Address" required/>
               <textarea className="form-input-box" name="message" placeholder="Your Message" rows="10" required/>
-              <input type="checkbox" name="botcheck" class="hidden" style={{ display: "none" }}/>
+              <input type="checkbox" name="botcheck" className="hidden" style={{ display: "none" }}/>
               <SendButton className="send-button" type="submit">Send</SendButton>
               <span style={{ fontSize: ".7rem" }}>{result}</span>
             </form>

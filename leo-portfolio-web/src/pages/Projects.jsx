@@ -1,5 +1,6 @@
 import React from 'react';
 import '../App.css';
+import PropTypes from 'prop-types';
 import Grid from '@mui/material/Grid';
 import { useNavigate } from 'react-router-dom';
 // import axios from 'axios';
@@ -74,7 +75,7 @@ const Modal = styled('div') (({ toggle, top, width, height, modalName }) => ({
   flexDirection: 'column',
   alignItems: 'flex-end',
   position: 'fixed',
-  backgroundColor: 'rgb(8, 23, 11, 0.8)',
+  backgroundColor: (modalName === "animateAddOnModal") ? 'rgb(8, 23, 11, 0.8)' : 'rgb(90, 165, 107, 0.9)',
   zIndex: '2',
   top: top,
   left: '50%',
@@ -116,6 +117,14 @@ const ProjectsBox = ({ id, title, description, onClick, selected }) => (
   </Item>
 )
 
+ProjectsBox.propTypes = {
+  id: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string,
+  selected: PropTypes.bool.isRequired,
+  onClick: PropTypes.func.isRequired,
+};
+
 const AddOn = ({ primary, secondary, onClick, selected }) => (
   <AddOnButton className="add-on-box" onClick={() => onClick(primary)} selected={selected}>
     <Typography sx={{ fontSize: "1.75rem", fontWeight: "500", color: "#e8e5df" }}>
@@ -127,7 +136,14 @@ const AddOn = ({ primary, secondary, onClick, selected }) => (
   </AddOnButton>
 )
 
-function Projects({ token, setTokenFunction }) {
+AddOn.propTypes = {
+  primary: PropTypes.string.isRequired,
+  secondary: PropTypes.string.isRequired,
+  selected: PropTypes.bool.isRequired,
+  onClick: PropTypes.func.isRequired,
+};
+
+function Projects() {
   const navigate = useNavigate();
   
   const [selectedProject, setSelectedProject] = React.useState(null);
@@ -224,7 +240,7 @@ function Projects({ token, setTokenFunction }) {
   }
 
   return <>
-    <div sx={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center"}}>
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center"}}>
       <Container component="main" sx={{ display: "flex", flexDirection:"column" }}>
         <Grid
           sx={{
@@ -288,7 +304,7 @@ function Projects({ token, setTokenFunction }) {
             </FlexDiv>
           </Grid>
           <div style={{ display: 'flex', justifyContent: 'center', width: '100%', marginTop: "50px"}}>
-            <ProgButton onClick={openModals}>Next</ProgButton>
+            <ProgButton className="next-button" onClick={openModals}>Next</ProgButton>
           </div>
         </Grid>
 
@@ -303,7 +319,13 @@ function Projects({ token, setTokenFunction }) {
           Please select all projects to continue!
         </Typography>
       </Modal>
-      <Modal className="add-on-modal" toggle={toggleAddOnModal} top="50%" width="900px" modalName="animateAddOnModal">
+      <Modal
+        className="add-on-modal"
+        toggle={toggleAddOnModal}
+        top="50%"
+        width="900px"
+        modalName="animateAddOnModal"
+      >
         <ExitButton onClick={openModals}>
           &#215;
         </ExitButton>
@@ -350,7 +372,7 @@ function Projects({ token, setTokenFunction }) {
           Add all to cart?
         </span>
         <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
-          <ProgButton onClick={openAddOnError}>Next</ProgButton>
+          <ProgButton className="next-button" onClick={openAddOnError}>Next</ProgButton>
         </div>
       </Modal>
       <Overlay errorToggle={toggleAddOnErrorModal} sx={{ zIndex: "3" }}>
@@ -365,7 +387,7 @@ function Projects({ token, setTokenFunction }) {
           <ExitButton onClick={openAddOnError}>
             &#215;
           </ExitButton>
-          <Typography sx={{ width: '100%', textAlign: 'center', }}>
+          <Typography sx={{ width: '100%', textAlign: 'center' }}>
             Please select all add-ons to continue!
           </Typography>
         </Modal>

@@ -1,8 +1,8 @@
 import React from 'react';
 import '../App.css';
+import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
-// import axios from 'axios';
 import {
   Typography,
   Container,
@@ -127,7 +127,23 @@ const ExperienceBox = ({ id, title, subtitle, description, items, selected, onCl
   </Grid>
 )
 
-function Experiences({ token, setTokenFunction }) {
+ExperienceBox.propTypes = {
+  id: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  subtitle: PropTypes.string,
+  description: PropTypes.string,
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      primary: PropTypes.string.isRequired,
+      secondary: PropTypes.string,
+      details: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+  selected: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
+};
+
+function Experiences() {
   const navigate = useNavigate();
   const [selected, setSelected] = React.useState("");
   const [modalToggle, setModalToggle] = React.useState(false);
@@ -150,7 +166,7 @@ function Experiences({ token, setTokenFunction }) {
   }
 
   return (
-    <div sx={{ display: "flex", flexDirection: "column", alignContent: "center", justifyContent: "center"}}>
+    <div style={{ display: "flex", flexDirection: "column", alignContent: "center", justifyContent: "center"}}>
       <Container component="main" maxWidth="md" sx={{ display: "flex", flexDirection:"column", paddingBottom: "50px" }}>
         <Typography sx={{ fontSize: ".8rem", color: "#a7a396" }}>
           Step <b>1</b> of <b>3</b>
@@ -168,7 +184,7 @@ function Experiences({ token, setTokenFunction }) {
         </Grid>
       </Container>
       <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
-        <ProgButton onClick={toggleModal}>Next</ProgButton>
+        <ProgButton className="next-button" onClick={toggleModal}>Next</ProgButton>
       </div>
       <Overlay errorToggle={modalToggle}>
         <Modal

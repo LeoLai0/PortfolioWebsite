@@ -28,9 +28,21 @@ const NavButton = styled('button')({
   color: "#e8e5df",
 });
 
-const pages = ['Dashboard', 'Experiences', 'Projects', 'Cart'];
+const SideBar = styled('div') ({
+  display: "flex",
+  position: "absolute",
+  flexDirection: "column",
+  left: "30px",
+  top: "50%",
+  transform: "translateY(-50%)",
+  backgroundColor: "rgb(200, 200, 200, 0.2)",
+  width: "80px",
+  borderRadius: "50px"
+})
 
-const AnimatedRoutes = ({ token, setTokenFunction }) => {
+const pages = ['Dashboard', 'Experiences', 'Projects'];
+
+const AnimatedRoutes = () => {
   const location = useLocation();
   return (
     <TransitionGroup component={null}>
@@ -42,10 +54,10 @@ const AnimatedRoutes = ({ token, setTokenFunction }) => {
         <div className="transition-wrapper">
           <Routes location={location}>
             <Route path="/" element={<Navigate to="/dashboard" />} />
-            <Route path="/dashboard" element={<Dashboard token={token} setTokenFunction={setTokenFunction} />} />
-            <Route path="/projects" element={<Projects token={token} setTokenFunction={setTokenFunction} />} />
-            <Route path="/experiences" element={<Experiences token={token} setTokenFunction={setTokenFunction} />} />
-            <Route path="/cart" element={<Contact token={token} setTokenFunction={setTokenFunction} />} />
+            <Route path="/dashboard" element={<Dashboard/>} />
+            <Route path="/projects" element={<Projects/>} />
+            <Route path="/experiences" element={<Experiences/>} />
+            <Route path="/cart" element={<Contact/>} />
           </Routes>
         </div>
       </CSSTransition>
@@ -54,18 +66,6 @@ const AnimatedRoutes = ({ token, setTokenFunction }) => {
 };
 
 function App() {
-  let lsToken = null;
-
-  if (localStorage.getItem('token')) {
-    lsToken = localStorage.getItem('token');
-  }
-  const [token, setToken] = React.useState(lsToken);
-
-  const setTokenAbstract = (token) => {
-    setToken(token);
-    localStorage.setItem('token', token);
-  };
-
   return (
     <div className="app-container">
       <Router>
@@ -97,9 +97,32 @@ function App() {
           </NavigationMenu>
         </Toolbar>
         <div className="main-content">
-          <AnimatedRoutes token={token} setTokenFunction={setTokenAbstract}/>
+          <AnimatedRoutes/>
         </div>
       </Router>
+      <SideBar>
+          <img
+            className="contact-link-button"
+            src="/images/linkedIn.webp"
+            alt="linkedIn logo"
+            style={{ borderRadius: "50px", padding: "10px", margin: "10px 0" }}
+            onClick={() => window.open("https://www.linkedin.com/in/Leo-Lai1/", '_blank')}
+          />
+          <img
+            className="contact-link-button"
+            src="/images/github-black.webp"
+            alt="github logo"
+            style={{ borderRadius: "50px", padding: "10px", margin: "10px 0" }}
+            onClick={() => window.open("https://github.com/LeoLai0", '_blank')}
+          />
+          <img
+            className="contact-link-button"
+            src="/images/mail.png"
+            alt="email logo"
+            style={{ borderRadius: "50px", padding: "10px", margin: "10px 0" }}
+            onClick={() => window.open("mailto:leo.lai2610@gmail.com", '_blank')}
+          />
+      </SideBar>
     </div>
   );
 }

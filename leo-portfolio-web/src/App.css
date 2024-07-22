@@ -102,3 +102,15 @@ td {
   opacity: 0;
   transition: opacity 500ms;
 }
+
+.next-button:hover {
+  background-color: hsl(210, 99%, 50%);
+}
+
+.dashboard-to-experiences-button:hover {
+  opacity: 50%
+}
+
+.contact-link-button:hover {
+  opacity: 50%
+}
