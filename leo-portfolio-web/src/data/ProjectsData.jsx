@@ -1,6 +1,6 @@
 const projectsData = [
   {
-    id: 'Portfolio Website',
+    id: 'portfolio-website',
     title: 'Portfolio Website',
     description: 'Front-end React project to showcase portfolio',
     url: "https://github.com/LeoLai0/PortfolioWebsite"

@@ -48,7 +48,7 @@ const ExitButton = styled('block')({
   position: 'relative',
   top: '10',
   right: '0',
-  backgroundColor: '#529761',
+  backgroundColor: 'transparent',
   color: '#dcdcdc',
   fontSize: '1.1rem',
   border: 'none',
@@ -74,7 +74,7 @@ const Modal = styled('div') (({ toggle, top, width, height, modalName }) => ({
   flexDirection: 'column',
   alignItems: 'flex-end',
   position: 'fixed',
-  backgroundColor: 'rgb(90, 165, 107, 0.9)',
+  backgroundColor: 'rgb(8, 23, 11, 0.8)',
   zIndex: '2',
   top: top,
   left: '50%',
@@ -134,6 +134,7 @@ function Projects({ token, setTokenFunction }) {
   const [selection, setSelection] = React.useState(new Set());
   const [addOnSelection, setAddOnSelection] = React.useState(new Set());
   const [projectURL, setProjectURL] = React.useState(null);
+  const [imageLocation, setImageLocation] = React.useState(null);
   const [selectAll, setSelectAll] = React.useState(false);
   const [selectAllAddOns, setSelectAllAddOns] = React.useState(false);
   const [toggleErrorModal, setToggleErrorModal] = React.useState(false);
@@ -149,6 +150,7 @@ function Projects({ token, setTokenFunction }) {
     setSelection(new Set(selection));
     setSelectedProject(id === selectedProject ? null : id);
     setProjectURL(url);
+    setImageLocation(`/images/${id}.jpg`)
   }
 
   const handleSelectAll = (event) => {
@@ -222,69 +224,75 @@ function Projects({ token, setTokenFunction }) {
   }
 
   return <>
-    <div sx={{ display: "flex", flexDirection: "column", alignContent: "center", justifyContent: "center"}}>
-      <Container component="main" maxWidth="md" sx={{ display: "flex", flexDirection:"column", paddingBottom: "50px" }}>
-      </Container>
-      <Grid
-        sx={{
-          flexGrow: 1, height: "600px",
-          px: { xs: "10px", lg: "150px", xl: "200px" }
-        }}
-        container spacing={2}
-      >
-        <Grid item xs={8}>
-          <Typography sx={{ fontSize: "1rem", color: "#a7a396" }}>
-            Step <b>2</b> of <b>3</b>
-          </Typography>
-      
-          <Typography sx={{ fontSize: "2rem", fontWeight: "500" }}>
-            Choose Projects
-          </Typography>
-          <Box sx={{ height: "70%", position: "relative" }}>
-            {projectURL}
-            {projectURL && (
-              <div
-              style={{ height: "100%", cursor: "pointer", position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}
-              onClick={() => window.open(projectURL, '_blank')}
-              >
-              </div>
-            )}
-          </Box>
-        </Grid>
-        <Grid item xs={4}>
-          <Typography id="empty-spacer1" sx={{ fontSize: "1rem", color: "#a7a396" }}>
-            &nbsp;
-          </Typography>
-          <Typography id="empty-spacer2" sx={{ fontSize: "1.75rem", fontWeight: "500" }}>
-            &nbsp;
-          </Typography>
-          <FlexDiv className="projects-container" sx={{ height: "70%", flexDirection:"column", padding: "0", overflow: "scroll", msOverflowStyle: "none" }}>
-            <Typography sx={{ fontSize: "1.75rem", fontWeight: "500" }}>
-              Projects.
-              <Typography component="span" sx={{ fontSize: "1.75rem", fontWeight: "500", color: "#a7a396" }}>
-                Which interests you?
-              </Typography>
+    <div sx={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center"}}>
+      <Container component="main" sx={{ display: "flex", flexDirection:"column" }}>
+        <Grid
+          sx={{
+            flexGrow: 1, height: "600px", width: "1122px",
+          }}
+          container spacing={2}
+        >
+          <Grid item xs={8}>
+            <Typography sx={{ fontSize: "1rem", color: "#a7a396" }}>
+              Step <b>2</b> of <b>3</b>
             </Typography>
-            {projectsData.map((project) =>(
-              <ProjectsBox
-                key={project.id}
-                {...project}
-                onClick={() => handleProjectClick(project.id, project.url)}
-                selected={selection.has(project.id)}
-              />
-            ))}
-            <FlexDiv sx={{ flexDirection: "row", alignItems: "center" }}>
-              <input type="checkbox" id="add-all-check" checked={selectAll} onChange={handleSelectAll}/>
-              <span>
-                Add all to cart?
-              </span>
+        
+            <Typography sx={{ fontSize: "2rem", fontWeight: "500" }}>
+              Choose Projects
+            </Typography>
+            <Box sx={{ height: "412px", position: "relative" }}>
+              {imageLocation && (
+                <img
+                src={imageLocation}
+                alt="preview of a background describing the project name: {imageLocation}"
+                style={{ height: "100%", width: "100%", borderRadius: "15px" }}
+                />
+              )}
+              {projectURL && (
+                <div
+                style={{ height: "100%", cursor: "pointer", position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}
+                onClick={() => window.open(projectURL, '_blank')}
+                >
+                </div>
+              )}
+            </Box>
+          </Grid>
+          <Grid item xs={4}>
+            <Typography id="empty-spacer1" sx={{ fontSize: "1rem", color: "#a7a396" }}>
+              &nbsp;
+            </Typography>
+            <Typography id="empty-spacer2" sx={{ fontSize: "1.75rem", fontWeight: "500" }}>
+              &nbsp;
+            </Typography>
+            <FlexDiv className="projects-container" sx={{ height: "412px", flexDirection:"column", padding: "0", overflow: "scroll", msOverflowStyle: "none" }}>
+              <Typography sx={{ fontSize: "1.75rem", fontWeight: "500" }}>
+                Projects.
+                <Typography component="span" sx={{ fontSize: "1.75rem", fontWeight: "500", color: "#a7a396" }}>
+                  Which interests you?
+                </Typography>
+              </Typography>
+              {projectsData.map((project) =>(
+                <ProjectsBox
+                  key={project.id}
+                  {...project}
+                  onClick={() => handleProjectClick(project.id, project.url)}
+                  selected={selection.has(project.id)}
+                />
+              ))}
+              <FlexDiv sx={{ flexDirection: "row", alignItems: "center" }}>
+                <input type="checkbox" id="add-all-check" checked={selectAll} onChange={handleSelectAll}/>
+                <span>
+                  Add all to cart?
+                </span>
+              </FlexDiv>
             </FlexDiv>
-          </FlexDiv>
+          </Grid>
+          <div style={{ display: 'flex', justifyContent: 'center', width: '100%', marginTop: "50px"}}>
+            <ProgButton onClick={openModals}>Next</ProgButton>
+          </div>
         </Grid>
-        <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
-          <ProgButton onClick={openModals}>Next</ProgButton>
-        </div>
-      </Grid>
+
+      </Container>
     </div>
     <Overlay addOnToggle={toggleAddOnModal} errorToggle={toggleErrorModal}>
       <Modal className="error-modal" toggle={toggleErrorModal} top="10%" width="350px" modalName="animateErrorModal">
